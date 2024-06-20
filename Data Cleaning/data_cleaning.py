@@ -50,3 +50,5 @@ star_label = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 # Applicazione della normalizzazione utilizzando la funzione cut
 df['rating'] = pd.cut(df['rating'], bins=star_range, labels=star_label, right=False)
 
+# Salvataggio dell DataFrame modificato in un nuovo file CSV
+df.to_csv('smartphone_cleaned_v5_modified.csv', index=False)
