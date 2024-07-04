@@ -1,0 +1,32 @@
+# ide files
+\.venv
+\.idea
+\venv
+
+# backend
+Web-app/back-end/.env
+Web-app/back-end/node_modules
+
+# dependencies
+Web-app/front-end/node_modules
+Web-app/front-end/.pnp
+Web-app/front-end/.pnp.js
+
+# testing
+Web-app/front-end/coverage
+
+# production
+Web-app/front-end/build
+
+# misc
+Web-app/front-end/.DS_Store
+Web-app/front-end/.env.local
+Web-app/front-end/.env.development.local
+Web-app/front-end/.env.test.local
+Web-app/front-end/.env.production.local
+
+Web-app/front-end/npm-debug.log*
+Web-app/front-end/yarn-debug.log*
+Web-app/front-end/yarn-error.log*
+
+Web-app/front-end/src/.env
