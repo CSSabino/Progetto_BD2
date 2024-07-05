@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 /*import ComparePhone from './pages/ComparePhone'
 import PhoneDetails from './pages/PhoneDetails';
 import AllPhones from './pages/AllPhones';
@@ -39,6 +41,8 @@ function App() {
         <div className='pages'>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
           </Routes>
         </div>
         <Footer />
