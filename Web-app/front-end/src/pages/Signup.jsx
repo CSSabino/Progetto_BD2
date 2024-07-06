@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useSignup } from "../hooks/useSignup"
 
 const Signup = () => {
     const [name, setName] = useState('')
@@ -7,12 +8,18 @@ const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [error, setError] = useState('');
+    const [errorMatchin, setErrorMatching] = useState('')
+    const {signup, error, isLoading} = useSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        console.log(name, surname, username, email, password, confirmPassword)
+        if (password !== confirmPassword) {
+            setErrorMatching('Passwords do not match');
+            return;
+          }
+        
+        await signup(name, surname, email, username, password)
     }
 
     return (
@@ -41,6 +48,7 @@ const Signup = () => {
             />
 
             <label>Email address:</label>
+
             <input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -48,6 +56,7 @@ const Signup = () => {
             />
 
             <label>Password:</label>
+
             <input
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
@@ -55,14 +64,16 @@ const Signup = () => {
             />
 
             <label>Confirm password:</label>
+
             <input
                 type="password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 value={confirmPassword}
             />
 
-            {error && <p>{error}</p>}
-            <button type="submit">Sign up</button>
+            <button type="submit" disabled={isLoading}>Sign up</button>
+            {errorMatchin && <p>{errorMatchin}</p>}
+            {error && <div>{error}</div>}
         </form>
     )
 }

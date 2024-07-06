@@ -6,6 +6,14 @@ const jwt = require('jsonwebtoken')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    surname: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -27,10 +35,10 @@ const userSchema = new Schema({
 
 
 // static function for signup --> for standard user
-userSchema.statics.signup = async function(username, password, email) {
+userSchema.statics.signup = async function(name, surname, email, username, password) {
 
     // validation
-    if (!username || !password || !email){
+    if (!name || !surname || !username || !password || !email){
         throw Error('All fields must be filled')
     }
 
@@ -55,7 +63,7 @@ userSchema.statics.signup = async function(username, password, email) {
     const hash = await bcrypt.hash(password, salt)
 
     // create user
-    const user = await this.create({username, password: hash, email, isAdmin: false})
+    const user = await this.create({name, surname, username, password: hash, email, isAdmin: false})
     console.log('signup', user)
     return user
 }
