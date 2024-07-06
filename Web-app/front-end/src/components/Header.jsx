@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLogout } from '../hooks/useLogout';
 import { Link } from 'react-router-dom';
 import '../style/header.css'
 
 function Header(/*{ onSearch }*/) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const isLoggedInRef = useRef(isLoggedIn); // useRef per memorizzare lo stato iniziale
+  const isLoggedInRef = useRef(isLoggedIn); // useRef per memorizzare lo stato iniziale  
+  const { logout } = useLogout()
 
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
+
     if (userInfo) {
       // Se esiste userInfo nel localStorage, l'utente è già loggato
       setIsLoggedIn(true);
@@ -19,8 +22,7 @@ function Header(/*{ onSearch }*/) {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('userInfo');
-    setIsLoggedIn(false);
+    logout()
   }
 
   // Mostra il pulsante di logout solo se l'utente è loggato e isLoggedInRef.current è true
