@@ -91,4 +91,27 @@ userSchema.statics.login = async function(username, password) {
     return user
 }
 
+// static function for change password
+userSchema.statics.changePassword = async function(user, newPassword) {
+
+    // validation
+    if (!newPassword){
+        throw Error('The field must be filled')
+    }
+
+    // min 8 characters, min 1 lower character, min 1 upper character, min 1 number, min 1 symbol
+    if (!validator.isStrongPassword(newPassword)){
+        throw Error('Password not strong enough')
+    }
+
+    // hash the password
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
+    user.password = hash
+
+    console.log('sichangePassword', user)
+
+    return user
+}
+
 module.exports = mongoose.model('User', userSchema)

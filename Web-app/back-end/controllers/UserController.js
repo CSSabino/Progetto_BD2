@@ -36,8 +36,24 @@ const signupUser = async (req, res) => {
     }
 }
 
+const changePassword = async (req, res) => {
+    const { newPassword} = req.body;
+
+    try{
+        const user = await User.changePassword(req.user, newPassword)
+        console.log('changePassword', user)
+        return res.status(200).json({user})
+    } catch (error) {
+        return res.status(400).json({error: error.message})
+    }
+}
+
+const updateUserData = async (req, res) => {
+    
+}
+
 const reviewList = async (req, res) => {
     
 }
 
-module.exports = { loginUser, signupUser, reviewList}
+module.exports = { loginUser, signupUser, reviewList, changePassword}

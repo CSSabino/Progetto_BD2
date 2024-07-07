@@ -9,8 +9,8 @@ const {
 } = require("../controllers/SmartphoneController")
 
 // middleware
-//const requireAuthAdmin = require('../middleware/requireAuthAdmin')
-//router.use(requireAuthAdmin)
+const requireAuthAdmin = require('../middleware/requireAuthAdmin')
+router.use(requireAuthAdmin)
 
 // if authentication has success
 

@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from 'react';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Link } from 'react-router-dom';

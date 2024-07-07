@@ -8,7 +8,6 @@ function PhoneCard({ phone }) {
       <p>{phone.brand_name}</p>
       <p>{phone.price}</p>
       <p>{phone.rating}</p>
-      //informazioni cellulare
       <Link to={`/phone/${phone._id}`}>Details</Link>
     </div>
   );
