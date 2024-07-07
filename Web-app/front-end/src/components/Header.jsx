@@ -27,6 +27,9 @@ function Header(/*{ onSearch }*/) {
           </li>
           {user && (
             <>
+            <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
               <li>
                 <button onClick={handleLogout}>Logout</button>
               </li>
