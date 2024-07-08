@@ -11,7 +11,7 @@ function Compare({ phones }) {
         <tr>
           <th>Feature</th>
           {phones.map(phone => (
-            <th key={phone.id}>{phone.name}</th>
+            <th key={phone.id}>{phone.model}</th>
           ))}
         </tr>
       </thead>
@@ -19,7 +19,7 @@ function Compare({ phones }) {
         <tr>
           <td>Brand</td>
           {phones.map(phone => (
-            <td key={phone.id}>{phone.brand}</td>
+            <td key={phone.id}>{phone.brand_name}</td>
           ))}
         </tr>
         <tr>
