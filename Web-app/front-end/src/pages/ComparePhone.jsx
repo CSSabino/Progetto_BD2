@@ -13,7 +13,8 @@ const ComparePhone = () => {
     const fetchPhones = async () => {
       try {
         const response = await fetch('api/smartphoneOperations');
-        setPhones(response.data);
+        const data = await response.json();
+        setPhones(data);
       } catch (error) {
         console.error('Error fetching phones:', error);
       }
@@ -26,7 +27,8 @@ const ComparePhone = () => {
     setPhone1(id);
     try {
       const response = await fetch(`api/smartphoneOperations/id/${id}`);
-      setDetails1(response.data);
+      const data = await response.json();
+      setDetails1(data);
     } catch (error) {
       console.error('Error fetching phone details:', error);
     }
@@ -36,7 +38,8 @@ const ComparePhone = () => {
     setPhone2(id);
     try {
       const response = await fetch(`api/smartphoneOperations/id/${id}`);
-      setDetails2(response.data);
+      const data = await response.json();
+      setDetails2(data);
     } catch (error) {
       console.error('Error fetching phone details:', error);
     }

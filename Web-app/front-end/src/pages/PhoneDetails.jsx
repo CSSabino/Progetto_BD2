@@ -11,8 +11,9 @@ function PhoneDetails() {
     
     const fetchPhoneDetails = async () => {
       try {
-        const response = await fetch(`api/smartphoneOperations/smartphone/${id}`);
-        setSmartphone(response.data);
+        const response = await fetch(`/api/smartphoneOperations/id/${id}`);
+        const data = await response.json();
+        setSmartphone(data);
       } catch (err) {
         setError('Error fetching phone details');
       }
