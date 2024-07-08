@@ -8,6 +8,9 @@ import HomePage from './pages/HomePage';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard'
+import AllPhones from './pages/AllPhones';
+import PhoneDetails from './pages/PhoneDetails';
+import ComparePhone from './pages/ComparePhone';
 
 function App() {
   const { user } = useAuthContext()
@@ -22,6 +25,9 @@ function App() {
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
             <Route path="/register" element={!user ? <Signup /> : <Navigate to="/" />} />
             <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" />} />
+            <Route path="/compare" element={<ComparePhone />} />
+            <Route path="/phone/:id" element={<PhoneDetails />} />
+            <Route path="/phones" element={<AllPhones />} />
           </Routes>
         </div>
         <Footer />

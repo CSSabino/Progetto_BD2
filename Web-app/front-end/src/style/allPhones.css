@@ -1,0 +1,29 @@
+/*stile dei bottoni*/
+.button-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .button-container button {
+    background-color: #007BFF; /* Colore di sfondo blu */
+    color: white; /* Colore del testo bianco */
+    border: none; /* Nessun bordo */
+    border-radius: 5px; /* Angoli arrotondati */
+    padding: 10px 20px; /* Spaziatura interna */
+    margin: 5px; /* Margine intorno ai bottoni */
+    font-size: 16px; /* Dimensione del testo */
+    cursor: pointer; /* Cambia il cursore quando sopra il bottone */
+    transition: background-color 0.3s ease; /* Transizione per l'effetto hover */
+  }
+  
+  .button-container button:hover {
+    background-color: #0056b3; /* Colore di sfondo più scuro quando si passa sopra */
+  }
+  
+  .button-container button:focus {
+    outline: none; /* Rimuovi il bordo di messa a fuoco */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Aggiungi un'ombra di messa a fuoco */
+  }
+  
