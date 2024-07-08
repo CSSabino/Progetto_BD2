@@ -92,7 +92,7 @@ userSchema.statics.login = async function(username, password) {
 }
 
 // static function for change password
-userSchema.statics.changePassword = async function(user, newPassword) {
+userSchema.statics.changePassword = async function(userLogged, newPassword) {
 
     // validation
     if (!newPassword){
@@ -106,10 +106,30 @@ userSchema.statics.changePassword = async function(user, newPassword) {
 
     // hash the password
     const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(password, salt)
-    user.password = hash
+    const hash = await bcrypt.hash(newPassword, salt)
 
-    console.log('sichangePassword', user)
+    const update = { $set: { password: hash } };
+    
+    const user = await this.findOneAndUpdate({ username: userLogged.username }, update, { new: true });
+
+    console.log('changePassword', user)
+
+    return user
+}
+
+// static function for update user data
+userSchema.statics.updateUserData = async function(name, surname, userLogged) {
+
+    // validation
+    if (!name || !surname || !userLogged.username ){
+        throw Error('All fields must be filled')
+    }
+    
+    const update = { $set: { name: name, surname: surname } };
+    
+    const user = await this.findOneAndUpdate({ username: userLogged.username }, update, { new: true });
+
+    console.log('updateUserData', user)
 
     return user
 }

@@ -1,7 +1,6 @@
-const express = require('express')
 const User = require('../models/UserModel')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const mongoose = require("mongoose");
 
 // create token
 const createToken = (_id) => {
@@ -20,7 +19,6 @@ const loginUser = async (req, res) => {
         return res.status(400).json({error: error.message})
     }
 }
-
 
 // signup user
 const signupUser = async (req, res) => {
@@ -49,11 +47,19 @@ const changePassword = async (req, res) => {
 }
 
 const updateUserData = async (req, res) => {
-    
+    const { name, surname } = req.body
+
+    try{
+        const user = await User.updateUserData(name, surname, req.user);
+        console.log('updateUserData', user)
+        return res.status(200).json({user: user})
+    } catch (error) {
+        return res.status(400).json({error: error.message})
+    }
 }
 
 const reviewList = async (req, res) => {
     
 }
 
-module.exports = { loginUser, signupUser, reviewList, changePassword}
+module.exports = { loginUser, signupUser, reviewList, changePassword, updateUserData}
