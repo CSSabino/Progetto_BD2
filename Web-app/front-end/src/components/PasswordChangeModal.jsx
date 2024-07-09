@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 
+import '../style/passwordChangeModal.css'
+
 const PasswordChangeModal = ({ isOpen, onClose }) => {
     const { user } = useAuthContext();
 
@@ -26,6 +28,7 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
 
         if(!response.ok){
             setError(data.error)
+            return;
         }
 
         if(response.ok){
