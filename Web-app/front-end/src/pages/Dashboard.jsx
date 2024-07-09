@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import { useAuthContext } from '../hooks/useAuthContext';
 import EditProfileForm from '../components/EditProfileForm';
 import UserReviews from '../components/UserReviews';
+import SmartphoneOperation from '../components/SmartphoneOperations';
 
 
 function Dashboard() {
@@ -25,6 +26,7 @@ function Dashboard() {
             <Routes>
               <Route path="/profile" element={<EditProfileForm />} />
               <Route path="/reviews" element={<UserReviews />} />
+              <Route path="/smartphoneOperations" element={<SmartphoneOperation />} />
             </Routes>
           </div>
 

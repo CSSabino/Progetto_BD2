@@ -20,7 +20,7 @@ const Sidebar = () => {
 
         {user.user.isAdmin && (
           <li>
-          <Link to="smartphoneOperation">Smartphone Operation</Link>
+          <Link to="smartphoneOperations">Smartphone Operation</Link>
         </li>
         )}
       </ul>

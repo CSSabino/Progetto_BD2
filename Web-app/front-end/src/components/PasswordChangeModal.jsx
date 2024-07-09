@@ -46,7 +46,6 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
       setError(error)
     }
 
-    // Reset dei campi e chiusura della finestra modale
     setNewPassword('');
     setConfirmPassword('');
     onClose();
