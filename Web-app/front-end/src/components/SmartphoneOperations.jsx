@@ -3,13 +3,16 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 import InsertSmartphoneModal from './InsertSmartphoneModal';
 import UpdateSmartphoneModal from './UpdateSmartphoneModal'
+import DeleteSmartphoneModal from './DeleteSmartphoneModal'
 
 const SmartphoneOperation = () => {
     const { user } = useAuthContext();
 
     const [phones, setPhones] = useState([]);
-    const [phoneSelected, setPhoneSelected] = useState(null);
-    const [detailsPhoneSelected, setDetailsPhoneSelected] = useState(null)
+    const [phoneUpdateSelected, setUpdatePhoneSelected] = useState(null);
+    const [phoneDeleteSelected, setDeletePhoneSelected] = useState(null);
+    const [detailsUpdatePhoneSelected, setUpdateDetailsPhoneSelected] = useState(null)
+    const [detailsDeletePhoneSelected, setDeleteDetailsPhoneSelected] = useState(null)
 
     const [insertModalOpen, setInsertModalOpen] = useState(false);
     const [updateModalOpen, setUpdateModalOpen] = useState(false);
@@ -21,8 +24,8 @@ const SmartphoneOperation = () => {
                 const response = await fetch('/api/smartphoneOperations');
                 const data = await response.json();
                 setPhones(data);
-                setPhoneSelected(phones[0]._id)
-                setDetailsPhoneSelected(phones[0])
+                setUpdatePhoneSelected(phones[0]._id)
+                setUpdateDetailsPhoneSelected(phones[0])
             } catch (error) {
                 console.error('Error fetching phones:', error);
             }
@@ -31,12 +34,24 @@ const SmartphoneOperation = () => {
         fetchPhones();
     }, []);
 
-    const handlePhoneSelect = async (id) => {
-        setPhoneSelected(id);
+    const handleUpdatePhoneSelect = async (id) => {
+        setUpdatePhoneSelected(id);
         try {
           const response = await fetch(`/api/smartphoneOperations/id/${id}`);
           const data = await response.json();
-          setDetailsPhoneSelected(data);
+          setUpdateDetailsPhoneSelected(data);
+        } catch (error) {
+          console.error('Error fetching phone details:', error);
+        }
+      };
+
+      const handleDeletePhoneSelect = async (id) => {
+        setDeletePhoneSelected(id);
+        try {
+          const response = await fetch(`/api/smartphoneOperations/id/${id}`);
+          const data = await response.json();
+          setDeleteDetailsPhoneSelected(data);
+
         } catch (error) {
           console.error('Error fetching phone details:', error);
         }
@@ -66,7 +81,6 @@ const SmartphoneOperation = () => {
         setDeleteModalOpen(false);
     };
 
-    // <UpdateSmartphoneModal isOpen={isModalOpen} onClose={handleCloseModal} detailsPhoneSelected={detailsPhoneSelected}/>
     return (
         <div>
             <div className="content">
@@ -76,7 +90,7 @@ const SmartphoneOperation = () => {
 
             <div className="content">
                 <div>
-                    <select onChange={(e) => handlePhoneSelect(e.target.value)} value={phoneSelected} required>
+                    <select onChange={(e) => handleUpdatePhoneSelect(e.target.value)} value={phoneUpdateSelected} required>
                         <option value="">Select a phone</option>
                         {phones.map(phone => (
                             <option key={phone._id} value={phone._id}>{phone.model}</option>
@@ -84,12 +98,20 @@ const SmartphoneOperation = () => {
                     </select>
                 </div>
                 <button onClick={openUpdateModal}>Update Smartphone</button>
-                <UpdateSmartphoneModal isOpen={updateModalOpen} onClose={closeUpdateModal} detailsPhoneSelected={detailsPhoneSelected}/>
+                <UpdateSmartphoneModal isOpen={updateModalOpen} onClose={closeUpdateModal} detailsPhoneSelected={detailsUpdatePhoneSelected}/>
             </div>
 
             <div className="content">
+                <div>
+                    <select onChange={(e) => handleDeletePhoneSelect(e.target.value)} value={phoneDeleteSelected} required>
+                        <option value="">Select a phone</option>
+                        {phones.map(phone => (
+                            <option key={phone._id} value={phone._id}>{phone.model}</option>
+                        ))}
+                    </select>
+                </div>
                 <button onClick={openDeleteModal}>Delete Smartphone</button>
-
+                <DeleteSmartphoneModal isOpen={deleteModalOpen} onClose={closeDeleteModal} detailsPhoneSelected={detailsDeletePhoneSelected}/>
             </div>
         </div>
     );

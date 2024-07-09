@@ -58,8 +58,6 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
             setPrimary_camera_rear(detailsPhoneSelected.primary_camera_rear)
             setPrimary_camera_front(detailsPhoneSelected.primary_camera_front)
             setExtended_memory_available(detailsPhoneSelected.extended_memory_available)
-
-            console.log("ci sono")
         }
     }, [detailsPhoneSelected]);
 
