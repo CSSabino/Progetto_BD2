@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 
+import PasswordChangeModal from './PasswordChangeModal'
+
 const EditProfileForm = () => {
   const { user } = useAuthContext();
 
@@ -8,6 +10,16 @@ const EditProfileForm = () => {
   const [surname, setSurname] = useState('');  
   const [error, setError] = useState(null)  
   const [isLoading, setIsLoading] = useState(null)
+  
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     if (user) {
@@ -45,24 +57,33 @@ const EditProfileForm = () => {
         setIsLoading(false)
       }     
     } catch (error) {
-      console.error('Error updare user:', error);
+      console.error('Error update user:', error);
+      setError(error)
     }
   };
 
   return (
-    <form onSubmit={handleUpdate}>
-      <h2>Edit Profile</h2>
-      <label>
-        Name:
-        <input type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
-      </label>
-      <label>
-        Surname:
-        <input type="text" placeholder="Enter surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
-      </label>      
-      {error && <div>{error}</div>}
-      <button type="submit" disabled={isLoading}>Update</button>
-    </form>
+    <div>
+      <div>
+        <form onSubmit={handleUpdate}>
+          <h2>Edit Profile</h2>
+          <label>
+            Name:
+            <input type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
+          </label>
+          <label>
+            Surname:
+            <input type="text" placeholder="Enter surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
+          </label>      
+          {error && <div>{error}</div>}
+          <button type="submit" disabled={isLoading}>Update</button>
+        </form>
+      </div>
+      <div className="content">
+        <button onClick={handleOpenModal}>Change Password</button>
+        <PasswordChangeModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      </div>
+    </div>
   );
 };
 
