@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-const InsertSmartphoneModal = ({ isOpen, onClose }) => {
+const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
     const { user } = useAuthContext();
 
     const [brand_name, setBrand_name] = useState('');
@@ -33,12 +33,43 @@ const InsertSmartphoneModal = ({ isOpen, onClose }) => {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (detailsPhoneSelected) {
+            setBrand_name(detailsPhoneSelected.brand_name)
+            setModel(detailsPhoneSelected.model)
+            setPrice(detailsPhoneSelected.price)
+            setRating(detailsPhoneSelected.rating)
+            setHas_5g(detailsPhoneSelected.has_5g)
+            setHas_nfc(detailsPhoneSelected.has_nfc)
+            setHas_ir_blaster(detailsPhoneSelected.has_ir_blaster)
+            setProcessor_brand(detailsPhoneSelected.processor_brand)
+            setNum_cores(detailsPhoneSelected.num_cores)
+            setProcessor_speed(detailsPhoneSelected.processor_speed)
+            setBattery_capacity(detailsPhoneSelected.battery_capacity)
+            setFast_charging_available(detailsPhoneSelected.fast_charging_available)
+            setRam_capacity(detailsPhoneSelected.ram_capacity)
+            setInternal_memory(detailsPhoneSelected.internal_memory)
+            setScreen_size(detailsPhoneSelected.screen_size)
+            setRefresh_rate(detailsPhoneSelected.refresh_rate)
+            setResolution(detailsPhoneSelected.resolution)
+            setNum_rear_cameras(detailsPhoneSelected.num_rear_cameras)
+            setNum_front_cameras(detailsPhoneSelected.num_front_cameras)
+            setOs(detailsPhoneSelected.os)
+            setPrimary_camera_rear(detailsPhoneSelected.primary_camera_rear)
+            setPrimary_camera_front(detailsPhoneSelected.primary_camera_front)
+            setExtended_memory_available(detailsPhoneSelected.extended_memory_available)
+
+            console.log("ci sono")
+        }
+    }, [detailsPhoneSelected]);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/smartphone', {
-                method: 'POST',
+            const response = await fetch(`/api/smartphone/${detailsPhoneSelected._id}`, {
+                method: 'PATCH',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` },
                 body: JSON.stringify({
                     brand_name, model, price, rating, has_5g, has_nfc, has_ir_blaster,
@@ -74,7 +105,7 @@ const InsertSmartphoneModal = ({ isOpen, onClose }) => {
         <div className="modal">
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span>
-                <h2>Insert new smartphone</h2>
+                <h2>Update smartphone</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Brand Name:</label>
