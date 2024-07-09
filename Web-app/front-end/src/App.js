@@ -24,7 +24,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
             <Route path="/register" element={!user ? <Signup /> : <Navigate to="/" />} />
-            <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" />} />
+            <Route path="/dashboard/*" element={user ? <Dashboard /> : <Navigate to="/" />} />
             <Route path="/compare" element={<ComparePhone />} />
             <Route path="/phone/:id" element={<PhoneDetails />} />
             <Route path="/phones" element={<AllPhones />} />

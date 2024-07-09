@@ -3,7 +3,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
 import '../style/header.css'
 
-function Header(/*{ onSearch }*/) {
+function Header() {
   const { logout } = useLogout()
   const { user } = useAuthContext()
 
