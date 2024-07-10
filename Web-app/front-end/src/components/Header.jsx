@@ -1,11 +1,16 @@
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import '../style/header.css'
+import { SearchBar } from './SearchBar';
+import { SearchResultsList } from './SearchResultsList';
 
 function Header() {
   const { logout } = useLogout()
   const { user } = useAuthContext()
+
+  const [results, setResults] = useState([]);
 
 
   const handleLogout = () => {
@@ -45,6 +50,12 @@ function Header() {
               </li>
             </>
           )}
+          <li>
+            <div className='search-bar-conteiner'>
+              <SearchBar setResults={setResults} />
+              <SearchResultsList results={results} />
+            </div>
+          </li>
         </ul>
       </nav>
     </header>
