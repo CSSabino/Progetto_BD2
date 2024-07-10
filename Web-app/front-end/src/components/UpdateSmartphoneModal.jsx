@@ -30,6 +30,7 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
     const [extended_memory_available, setExtended_memory_available] = useState(false);
 
     const [error, setError] = useState('');
+    const [errorSmartphoneDetails, setErrorSmartphoneDatails] = useState('');
 
     const navigate = useNavigate();
 
@@ -58,6 +59,8 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
             setPrimary_camera_rear(detailsPhoneSelected.primary_camera_rear)
             setPrimary_camera_front(detailsPhoneSelected.primary_camera_front)
             setExtended_memory_available(detailsPhoneSelected.extended_memory_available)
+        } else {
+            setErrorSmartphoneDatails("Non è stato selezionato nessuno smartphone da aggiornare. Si prega di selezionarlo dal menù a tendina.")
         }
     }, [detailsPhoneSelected]);
 
@@ -104,7 +107,8 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span>
                 <h2>Update smartphone</h2>
-                <form onSubmit={handleSubmit}>
+                {detailsPhoneSelected && (
+                    <form onSubmit={handleSubmit}>
                     <div>
                         <label>Brand Name:</label>
                         <input type="text" value={brand_name} onChange={(e) => setBrand_name(e.target.value)} required />
@@ -200,6 +204,10 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
                     <button type="submit">Submit</button>
                     {error && <p>{error}</p>}
                 </form>
+                )}
+                {!detailsPhoneSelected && (
+                    <p>{errorSmartphoneDetails}</p>
+                )}
             </div>
         </div>
     );

@@ -38,8 +38,15 @@ const SmartphoneOperation = () => {
         setUpdatePhoneSelected(id);
         try {
           const response = await fetch(`/api/smartphoneOperations/id/${id}`);
-          const data = await response.json();
-          setUpdateDetailsPhoneSelected(data);
+
+          if(response.ok){
+            const data = await response.json();
+            setUpdateDetailsPhoneSelected(data);
+          }
+
+          if(!response.ok){
+            setUpdateDetailsPhoneSelected(null);
+          }
         } catch (error) {
           console.error('Error fetching phone details:', error);
         }
@@ -49,8 +56,15 @@ const SmartphoneOperation = () => {
         setDeletePhoneSelected(id);
         try {
           const response = await fetch(`/api/smartphoneOperations/id/${id}`);
-          const data = await response.json();
-          setDeleteDetailsPhoneSelected(data);
+          
+          if(response.ok){
+            const data = await response.json();
+            setDeleteDetailsPhoneSelected(data);
+          }
+
+          if(!response.ok){
+            setDeleteDetailsPhoneSelected(null);
+          }
 
         } catch (error) {
           console.error('Error fetching phone details:', error);

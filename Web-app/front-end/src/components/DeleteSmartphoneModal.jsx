@@ -9,13 +9,18 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
     const [model, setModel] = useState('');
 
     const [error, setError] = useState('');
+    const [errorSmartphoneDetails, setErrorSmartphoneDatails] = useState('');
 
     const navigate = useNavigate();
 
     useEffect(() => {
         if (detailsPhoneSelected) {
+            
+            console.log(detailsPhoneSelected)
             setBrand_name(detailsPhoneSelected.brand_name)
             setModel(detailsPhoneSelected.model)
+        } else {
+            setErrorSmartphoneDatails("Non è stato selezionato nessuno smartphone da eliminare. Si prega di selezionarlo dal menù a tendina.")
         }
     }, [detailsPhoneSelected]);
 
@@ -41,7 +46,7 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
 
         } catch (error) {
             console.error('Error update user:', error);
-            setError(error)
+            setError(error)            
         }
 
         onClose();
@@ -55,19 +60,29 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span>
                 <h2>Delete smartphone</h2>
-                <p>Are you sure to delete the smartphone with this features:
-                    <br></br>
-                    <br></br>
-                    <strong>Brand name: </strong>{brand_name}
-                    <br></br>
-                    <strong>Model: </strong>{model}
-                </p>
-                <form onSubmit={handleSubmit}>
-                    <button type="submit">Confirm delete</button>
-                </form>
+                {!detailsPhoneSelected && (
+                    <p>{errorSmartphoneDetails}</p>
+                )}
+                {detailsPhoneSelected && (
+                    <><p>
+                        Are you sure to delete the smartphone with this feature?
+
+                        <br></br>
+                        <br></br>
+
+                        <strong>Brand name: </strong>{brand_name}
+                        <br></br>
+                        <strong>Model: </strong>{model}
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                        <button type="submit">Confirm delete</button>
+                        {error && <p>{error}</p>}
+                    </form></>
+                )}
             </div>
         </div>
     );
 };
 
 export default InsertSmartphoneModal
+
