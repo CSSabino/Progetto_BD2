@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
 
+import '../style/login.css'
+
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -13,29 +15,34 @@ const Login = () => {
     }
 
     return (
-        <form className="login" onSubmit={handleSubmit}>
-            <h3>Login</h3>
-
-           
-            <label>Username:</label>
-
-            <input
+        <div className="login-container">
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="username">Username:</label>
+              <input
                 type="text"
-                onChange={(e) => setUsername(e.target.value)}
+                id="username"
                 value={username}
-            />
-
-            <label>Password:</label>
-            <input
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
                 type="password"
-                onChange={(e) => setPassword(e.target.value)}
+                id="password"
                 value={password}
-            />
-
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
             {error && <p>{error}</p>}
-            <button type="submit" disabled={isLoading}>Login</button>
-        </form>
-    )
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      );
 }
 
 export default Login;

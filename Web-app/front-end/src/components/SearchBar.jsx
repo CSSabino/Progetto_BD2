@@ -24,7 +24,7 @@ export const SearchBar = ({setResults}) => {
   
     return (
     <div className="input-wrapper"> 
-        <input 
+        <input className="input-bar"
             placeholder='Type to search...' 
             value={input} 
             onChange={(e) => handleChange(e.target.value)}

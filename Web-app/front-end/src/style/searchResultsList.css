@@ -1,6 +1,6 @@
 .results-list {
     position: absolute;  
-    width: 100%;
+    width: 30%;
     background-color: black;
     display: flex;
     flex-direction: column;

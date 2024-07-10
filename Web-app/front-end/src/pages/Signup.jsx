@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
 
+import '../style/register.css'
+
 const Signup = () => {
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
@@ -23,9 +25,10 @@ const Signup = () => {
     }
 
     return (
-        <form className="signup" onSubmit={handleSubmit}>
-            <h3>Sign Up</h3>
-
+        <div className="register-container">
+          <h2>Register</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
             <label>Name:</label>
             <input
                 type="text"
@@ -39,43 +42,55 @@ const Signup = () => {
                 onChange={(e) => setSurname(e.target.value)}
                 value={surname}
             />
-            <label>Username:</label>
 
-            <input
-                type="text"
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-            />
-
-            <label>Email address:</label>
-
-            <input
+              <label htmlFor="email">Email:</label>
+              <input
                 type="email"
-                onChange={(e) => setEmail(e.target.value)}
+                id="email"
                 value={email}
-            />
-
-            <label>Password:</label>
-
-            <input
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              </div>
+              
+              <div className="form-group">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
                 type="password"
-                onChange={(e) => setPassword(e.target.value)}
+                id="password"
                 value={password}
-            />
-
-            <label>Confirm password:</label>
-
-            <input
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
                 type="password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                id="confirmPassword"
                 value={confirmPassword}
-            />
-
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+            
             <button type="submit" disabled={isLoading}>Sign up</button>
             {errorMatchin && <p>{errorMatchin}</p>}
             {error && <div>{error}</div>}
-        </form>
-    )
+          </form>
+        </div>
+      );
 }
 
 export default Signup;
