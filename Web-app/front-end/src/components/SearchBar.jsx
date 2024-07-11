@@ -31,8 +31,8 @@ export const SearchBar = ({setResults}) => {
             onChange={(e) => handleChange(e.target.value)}
         />
         <Link
-        to={`/search-phones/${input}`}
-        className="search-button"> Search All
+        to={`/search-phones?value=${input}`}
+        className="search-button"> <button>Search All</button>
         </Link>
     </div>
   )

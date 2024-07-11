@@ -77,7 +77,6 @@ const addReviewToList = async (req, res) => {
     }
 
     try {
-        //const user = await User.findByUsername(user.username);
         const user = await User.findOne({ username: req.user.username })
 
         if (!user) {
