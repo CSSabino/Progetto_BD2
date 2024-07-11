@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 import '../style/phoneDetails.css'
 
 function PhoneDetails() {
   const { id } = useParams();
-
+  const { user} = useAuthContext();
   const [smartphone, setSmartphone] = useState([]);
   const [error, setError] = useState('');
   const [rating, setRating] = useState('');
@@ -28,25 +29,12 @@ function PhoneDetails() {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
 
-    if (!rating || !comment) {
-      setReviewError('Rating and comment are required.');
-      return;
-    }
-
-    const user = JSON.parse(localStorage.getItem('user'));
-    const token = user?.token;
-
-    if (!token) {
-      setReviewError('You must be logged in to submit a review.');
-      return;
-    }
-
     try {
       const response = await fetch('/api/smartphoneOperations/addReview', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${user.token}`
         },
         body: JSON.stringify({
           smartphoneId: id,
@@ -57,10 +45,27 @@ function PhoneDetails() {
 
       const data = await response.json();
       if (response.ok) {
-        setSmartphone(data);
-        setRating('');
-        setComment('');
-        setReviewError('');
+        const response2 = await fetch('/api/userOperations/addReviewToList', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          },
+          body: JSON.stringify({
+            smartphoneId: id,
+            rating,
+            comment
+          })
+        });
+        if(response2.ok) {
+          setSmartphone(data);
+          setRating('');
+          setComment('');
+          setReviewError('');
+        }else {
+          setReviewError(data.error || 'Failed to add Listreview.');
+        }
+
       } else {
         setReviewError(data.error || 'Failed to add review.');
       }
