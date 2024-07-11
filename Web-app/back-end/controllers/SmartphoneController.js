@@ -408,7 +408,7 @@ const addReviewToSmartphone = async (req, res) => {
         }
 
         const newReview = {
-            user_username: "req.user.username", 
+            user_username: req.user.username, 
             rating: Number(rating),
             comment: comment,
             review_date: new Date()

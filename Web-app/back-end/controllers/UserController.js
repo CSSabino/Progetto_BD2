@@ -1,5 +1,4 @@
 const User = require('../models/UserModel')
-const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 // create token
@@ -59,7 +58,47 @@ const updateUserData = async (req, res) => {
 }
 
 const reviewList = async (req, res) => {
-    
+
+    try{
+        const userReviews = await User.findOne({ username: req.user.username}).select('listReview');
+        
+        return res.status(200).json({listReview: userReviews.listReview})
+    } catch (error) {
+        return res.status(400).json({error: error.message})
+    }
 }
 
-module.exports = { loginUser, signupUser, reviewList, changePassword, updateUserData}
+const addReviewToList = async (req, res) => {
+
+    const { smartphoneId, rating, comment } = req.body;
+
+    if (!rating || !comment) {
+        return res.status(400).json({ error: "Rating and comment are required." });
+    }
+
+    try {
+        //const user = await User.findByUsername(user.username);
+        const user = await User.findOne({ username: req.user.username })
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found." });
+        }
+
+        const newReview = {
+            smartphoneId_reviewed: smartphoneId, 
+            rating: Number(rating),
+            comment: comment,
+            review_date: new Date()
+        };
+
+        user.listReview.push(newReview);
+        await user.save();
+
+        return res.status(201).json(user);
+    } catch (error) {
+        return res.status(500).json({ error: "Failed to add review.", details: error.message });
+    }
+
+}
+
+module.exports = { loginUser, signupUser, reviewList, changePassword, updateUserData, addReviewToList}
