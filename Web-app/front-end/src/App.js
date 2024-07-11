@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard'
 import AllPhones from './pages/AllPhones';
 import PhoneDetails from './pages/PhoneDetails';
 import ComparePhone from './pages/ComparePhone';
+import SearchPhones from './pages/SearchPhones';
 
 function App() {
   const { user } = useAuthContext()
@@ -28,6 +29,7 @@ function App() {
             <Route path="/compare" element={<ComparePhone />} />
             <Route path="/phone/:id" element={<PhoneDetails />} />
             <Route path="/phones" element={<AllPhones />} />
+            <Route path="/search-phones" element={<SearchPhones />} />
           </Routes>
         </div>
         <Footer />

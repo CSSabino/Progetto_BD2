@@ -16,7 +16,7 @@ function Header() {
   const handleLogout = () => {
     logout()
   }
-
+  
   return (
     <header>
       <nav>

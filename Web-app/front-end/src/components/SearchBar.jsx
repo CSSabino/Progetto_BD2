@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom';
 import '../style/searchBar.css'
 
 export const SearchBar = ({setResults}) => {
@@ -29,6 +30,10 @@ export const SearchBar = ({setResults}) => {
             value={input} 
             onChange={(e) => handleChange(e.target.value)}
         />
+        <Link
+        to={`/search-phones/${input}`}
+        className="search-button"> Search All
+        </Link>
     </div>
   )
 }
