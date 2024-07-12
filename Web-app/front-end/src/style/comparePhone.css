@@ -1,0 +1,13 @@
+.phone-details-box {
+  width: 75%;
+  background-color: #1e6d8f;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin-left: 10%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+}

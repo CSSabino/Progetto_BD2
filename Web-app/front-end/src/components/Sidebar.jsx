@@ -22,7 +22,7 @@ const Sidebar = () => {
 
         {user.user.isAdmin && (
           <li>
-          <Link to="smartphoneOperations"><IoMdPhonePortrait className='icon'/> Smartphone Operation</Link>
+          <Link to="smartphoneOperations"><IoMdPhonePortrait className='icon'/> Smartphone Operations</Link>
         </li>
         )}
       </ul>

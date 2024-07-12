@@ -61,7 +61,7 @@
 
   .reviews-list {
     display: flex;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     height: 250px;
     gap: 20px;
     padding: 20px;

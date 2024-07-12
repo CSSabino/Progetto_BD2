@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
+import Phone from '../components/Phone';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+
 import '../style/phoneDetails.css'
 
 function PhoneDetails() {
   const { id } = useParams();
-  const { user} = useAuthContext();
+  const { user } = useAuthContext();
   const [smartphone, setSmartphone] = useState([]);
   const [error, setError] = useState('');
   const [rating, setRating] = useState('');
   const [comment, setComment] = useState('');
   const [reviewError, setReviewError] = useState('');
   useEffect(() => {
-    
+
     const fetchPhoneDetails = async () => {
       try {
         const response = await fetch(`/api/smartphoneOperations/id/${id}`);
@@ -58,12 +61,12 @@ function PhoneDetails() {
             comment
           })
         });
-        if(response2.ok) {
+        if (response2.ok) {
           setSmartphone(data);
           setRating('');
           setComment('');
           setReviewError('');
-        }else {
+        } else {
           setReviewError(data.error || 'Failed to add Listreview.');
         }
 
@@ -81,60 +84,27 @@ function PhoneDetails() {
 
   if (!smartphone) return <p>No smartphone found</p>;
 
-  const booleanField = (label, value) => (
-    <div className="phone-detail">
-      {label}: {value ? (
-        <FaCheck className='icon icon-confimr'/>
-      ) : (
-        <FaTimes className='icon icon-reject'/>
-      )}
-    </div>
-  );
-
   return (
     <div className="phone-details-container">
       <div className="phone-details-content">
-      <h1>{smartphone.model}</h1>
-        <div className="phone-details-box">
-        <div className="phone-detail">Brand: {smartphone.brand_name}</div>
-          <div className="phone-detail">Price: ${smartphone.price}</div>
-          <div className="phone-detail">Rating: {smartphone.rating}</div>
-          <div className="phone-detail">Internal memory: {smartphone.internal_memory} GB</div>
-          {booleanField("5G", smartphone.has_5g)}
-          {booleanField("NFC", smartphone.has_nfc)}
-          {booleanField("IR Blaster", smartphone.has_ir_blaster)}
-          <div className="phone-detail">Processor Brand: {smartphone.processor_brand}</div>
-          <div className="phone-detail">Number of Cores: {smartphone.num_cores}</div>
-          <div className="phone-detail">Processor Speed: {smartphone.processor_speed}</div>
-          <div className="phone-detail">Battery Capacity: {smartphone.battery_capacity}</div>
-          <div className="phone-detail">Fast Charging Available: {smartphone.fast_charging_available}</div>
-          <div className="phone-detail">RAM Capacity: {smartphone.ram_capacity}</div>
-          <div className="phone-detail">Screen Size: {smartphone.screen_size}</div>
-          <div className="phone-detail">Refresh Rate: {smartphone.refresh_rate}</div>
-          <div className="phone-detail">Resolution: {smartphone.resolution}</div>
-          <div className="phone-detail">Number of Rear Cameras: {smartphone.num_rear_cameras}</div>
-          <div className="phone-detail">Number of Front Cameras: {smartphone.num_front_cameras}</div>
-          <div className="phone-detail">Operating System: {smartphone.os}</div>
-          <div className="phone-detail">Primary Rear Camera: {smartphone.primary_camera_rear}</div>
-          <div className="phone-detail">Primary Front Camera: {smartphone.primary_camera_front}</div>
-          {booleanField("Extended Memory Available", smartphone.extended_memory_available)}
-        </div>
+
+      <Phone key={smartphone._id} smartphone={smartphone} />
 
         <div className="reviews-section">
-        <h2>Reviews</h2>
+          <h2>Reviews</h2>
           <div className='reviews-list'>
-          {smartphone.reviews && smartphone.reviews.length > 0 ? (
-            smartphone.reviews.map((review) => (
-              <div key={review._id} className="review">
-                <p><strong>{review.user_username}</strong></p>
-                <p>Rating: {review.rating}</p>
-                <p>{review.comment}</p>
-                <p>{new Date(review.review_date).toLocaleDateString()}</p>
-              </div>
-            ))
-          ) : (
-            <p>No reviews yet.</p>
-          )}
+            {smartphone.reviews && smartphone.reviews.length > 0 ? (
+              smartphone.reviews.map((review) => (
+                <div key={review._id} className="review">
+                  <p><strong>{review.user_username}</strong></p>
+                  <p>Rating: {review.rating}</p>
+                  <p>{review.comment}</p>
+                  <p>{formatDistanceToNow(new Date(review.review_date), { addSuffix: true })}</p>
+                </div>
+              ))
+            ) : (
+              <p>No reviews yet.</p>
+            )}
           </div>
 
           <h3>Add a Review</h3>

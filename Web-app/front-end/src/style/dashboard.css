@@ -4,6 +4,7 @@
   
   .sidebar {
     width: 200px;
+    min-height: 70vh;
     background: #f4f4f4;
     padding: 20px;
   }
