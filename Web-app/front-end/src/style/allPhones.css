@@ -7,15 +7,15 @@
   }
   
   .button-container button {
-    background-color: #007BFF; /* Colore di sfondo blu */
-    color: white; /* Colore del testo bianco */
-    border: none; /* Nessun bordo */
-    border-radius: 5px; /* Angoli arrotondati */
-    padding: 10px 20px; /* Spaziatura interna */
-    margin: 5px; /* Margine intorno ai bottoni */
-    font-size: 16px; /* Dimensione del testo */
-    cursor: pointer; /* Cambia il cursore quando sopra il bottone */
-    transition: background-color 0.3s ease; /* Transizione per l'effetto hover */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .button-container button:hover {

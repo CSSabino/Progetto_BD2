@@ -68,6 +68,7 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
               required
             />
           </label>
+          <br></br>
           <label>
             Confirm New Password:
             <input
@@ -77,6 +78,10 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
               required
             />
           </label>
+
+          <br></br>
+          <br></br>
+          
           <button type="submit">Change Password</button>
           {error && <p>{error}</p>}
         </form>

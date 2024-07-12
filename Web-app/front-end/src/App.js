@@ -13,6 +13,8 @@ import PhoneDetails from './pages/PhoneDetails';
 import ComparePhone from './pages/ComparePhone';
 import SearchPhones from './pages/SearchPhones';
 
+import './style/icon.css'
+
 function App() {
   const { user } = useAuthContext()
 

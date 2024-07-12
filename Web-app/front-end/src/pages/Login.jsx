@@ -38,7 +38,7 @@ const Login = () => {
                 required
               />
             </div>
-            {error && <p>{error}</p>}
+            {error && <p  className="error">{error}</p>}
             <button type="submit">Login</button>
           </form>
         </div>

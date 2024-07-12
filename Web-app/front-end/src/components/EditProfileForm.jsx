@@ -71,6 +71,9 @@ const EditProfileForm = () => {
             Name:
             <input type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
           </label>
+
+          <br></br>
+          
           <label>
             Surname:
             <input type="text" placeholder="Enter surname" value={surname} onChange={(e) => setSurname(e.target.value)} />

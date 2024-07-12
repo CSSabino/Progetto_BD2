@@ -59,6 +59,15 @@
     width: 100%;
   }
 
+  .reviews-list {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    height: 250px;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: scroll;
+  }
+
   .reviews-section h2, .reviews-section h3 {
     color: #1e6d8f;
   }
@@ -69,6 +78,9 @@
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    width: 30%;
+    flex: 1 1 calc(33.333% - 40px);
+    box-sizing: border-box;
   }
   
   .review p {

@@ -1,0 +1,11 @@
+.icon {
+    font-size: 18px;
+  }
+  
+  .icon-confirm {
+    color: rgb(11, 239, 11);
+  }
+  
+  .icon-reject {
+    color: red;
+  }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 import '../style/phoneDetails.css'
 
 function PhoneDetails() {
@@ -83,9 +84,9 @@ function PhoneDetails() {
   const booleanField = (label, value) => (
     <div className="phone-detail">
       {label}: {value ? (
-        <img src="/images/check.png" alt="Check" className="boolean-icon" />
+        <FaCheck className='icon icon-confimr'/>
       ) : (
-        <img src="/images/cross.png" alt="Cross" className="boolean-icon" />
+        <FaTimes className='icon icon-reject'/>
       )}
     </div>
   );
@@ -120,7 +121,8 @@ function PhoneDetails() {
         </div>
 
         <div className="reviews-section">
-          <h2>Reviews</h2>
+        <h2>Reviews</h2>
+          <div className='reviews-list'>
           {smartphone.reviews && smartphone.reviews.length > 0 ? (
             smartphone.reviews.map((review) => (
               <div key={review._id} className="review">
@@ -133,6 +135,7 @@ function PhoneDetails() {
           ) : (
             <p>No reviews yet.</p>
           )}
+          </div>
 
           <h3>Add a Review</h3>
           {reviewError && <p style={{ color: 'red' }}>{reviewError}</p>}

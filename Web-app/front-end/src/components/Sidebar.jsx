@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaUserEdit, FaStar } from 'react-icons/fa';
+import { IoMdPhonePortrait } from "react-icons/io";
 
 import { useAuthContext } from '../hooks/useAuthContext';
 
@@ -12,15 +14,15 @@ const Sidebar = () => {
     <div className="sidebar">
       <ul>
         <li>
-          <Link to="profile">Edit Profile</Link>
+          <Link to="profile"><FaUserEdit className='icon'/> Edit Profile</Link>
         </li>
         <li>
-          <Link to="reviews">My Reviews</Link>
+          <Link to="reviews"><FaStar className='icon'/> My Reviews</Link>
         </li>
 
         {user.user.isAdmin && (
           <li>
-          <Link to="smartphoneOperations">Smartphone Operation</Link>
+          <Link to="smartphoneOperations"><IoMdPhonePortrait className='icon'/> Smartphone Operation</Link>
         </li>
         )}
       </ul>
