@@ -16,6 +16,10 @@ function Header() {
   const handleLogout = () => {
     logout()
   }
+
+  const clearResults = () => {
+    setResults([]);
+  };
   
   return (
     <header>
@@ -53,7 +57,7 @@ function Header() {
           <li>
             <div className='search-bar-conteiner'>
               <SearchBar setResults={setResults} />
-              <SearchResultsList results={results} />
+              <SearchResultsList results={results} clearResults={clearResults} />
             </div>
           </li>
         </ul>
