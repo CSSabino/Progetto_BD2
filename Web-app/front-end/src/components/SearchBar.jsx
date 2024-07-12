@@ -22,6 +22,10 @@ export const SearchBar = ({setResults}) => {
         setInput(value)
         fetchData(value)
     }
+
+    const clearResults = () => {
+        setResults([]);
+      };
   
     return (
     <div className="input-wrapper"> 
@@ -35,7 +39,7 @@ export const SearchBar = ({setResults}) => {
         <div className="search-button-div">
             <Link
                 to={`/search-phones?value=${input}`}
-                className="search-button"> <button>Search All</button>
+                className="search-button" onClick={clearResults}> <button>Search All</button>
             </Link>
         </div>
     </div>
