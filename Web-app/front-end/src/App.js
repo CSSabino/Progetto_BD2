@@ -12,6 +12,7 @@ import AllPhones from './pages/AllPhones';
 import PhoneDetails from './pages/PhoneDetails';
 import ComparePhone from './pages/ComparePhone';
 import SearchPhones from './pages/SearchPhones';
+import NotFoundPage from './pages/NotFound';
 
 import './style/icon.css'
 
@@ -32,6 +33,8 @@ function App() {
             <Route path="/phone/:id" element={<PhoneDetails />} />
             <Route path="/phones" element={<AllPhones />} />
             <Route path="/search-phones" element={<SearchPhones />} />
+
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
         <Footer />

@@ -382,11 +382,7 @@ const filterSearchAndSortSmartphones = async (req, res) => {
 
     try {
         const smartphones = await Smartphone.find(query).sort(sortCriteria);
-/*
-        if (smartphones.length === 0) {
-            return res.status(404).json({ error: "No smartphones found with the specified criteria." });
-        }
-*/
+
         return res.status(200).json(smartphones);
     } catch (error) {
         return res.status(400).json({ error: "Failed to filter, search or sort smartphones", details: error.message });

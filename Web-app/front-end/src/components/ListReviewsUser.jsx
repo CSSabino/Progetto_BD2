@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+
+import UserReview from './UserReview';
+
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const UserReviews = () => {
@@ -14,18 +16,18 @@ const UserReviews = () => {
           const response = await fetch('/api/userOperations/getListReviews', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
-        });
-          
-        const data = await response.json();
+          });
 
-        if(response.ok){
-          console.log(data.listReview);
-          setReviews(data.listReview)
-        }
+          const data = await response.json();
 
-        if(!response.ok){
-          setError(data.error);
-        }
+          if (response.ok) {
+            console.log(data.listReview);
+            setReviews(data.listReview)
+          }
+
+          if (!response.ok) {
+            setError(data.error);
+          }
 
         } catch (err) {
           setError(err);
@@ -42,20 +44,21 @@ const UserReviews = () => {
     <div>
       <h2>My Reviews</h2>
       {reviews.length > 0 && (
-        <ul>
-        {reviews.map((review) => (
-          <><Link to={`/phone/${review.smartphoneId_reviewed}`}>Link to smartphone</Link><span><br></br>Rating: {review.rating}
-            <br></br>
-            Comment: {review.comment}</span><br></br><br></br></>
-        
-        ))}
-      </ul>
+        <div className='userlist'>
+
+          {reviews.map((review) => (
+
+            <><UserReview review={review} /></>
+
+          ))}
+          
+          </div>
       )}
-      {reviews.length <= 0 && (
-        <p>Non hai ancora recensioni</p>
-      )}
-    </div>
-  );
+          {reviews.length <= 0 && (
+            <p>Non hai ancora recensioni</p>
+          )}
+        </div>
+      );
 };
 
-export default UserReviews;
+      export default UserReviews;

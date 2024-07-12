@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import Phone from '../components/Phone';
+import Review from '../components/Review';
+
 import { useAuthContext } from '../hooks/useAuthContext';
 
 import '../style/phoneDetails.css'
@@ -95,12 +96,7 @@ function PhoneDetails() {
           <div className='reviews-list'>
             {smartphone.reviews && smartphone.reviews.length > 0 ? (
               smartphone.reviews.map((review) => (
-                <div key={review._id} className="review">
-                  <p><strong>{review.user_username}</strong></p>
-                  <p>Rating: {review.rating}</p>
-                  <p>{review.comment}</p>
-                  <p>{formatDistanceToNow(new Date(review.review_date), { addSuffix: true })}</p>
-                </div>
+                <Review review={review}/>
               ))
             ) : (
               <p>No reviews yet.</p>

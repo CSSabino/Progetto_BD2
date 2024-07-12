@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { useAuthContext } from '../hooks/useAuthContext';
 import EditProfileForm from '../components/EditProfileForm';
-import UserReviews from '../components/UserReviews';
+import UserReviews from '../components/ListReviewsUser';
 import SmartphoneOperation from '../components/SmartphoneOperations';
 
 
