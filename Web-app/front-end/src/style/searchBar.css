@@ -1,5 +1,5 @@
-.input-wrapper{
-    background-color: white;
+.input-wrapper {
+    background-color: transparent;
     width: 100%;
     border-radius: 10px;
     height: 2.5rem;
@@ -7,17 +7,40 @@
     box-shadow: 0px 0px 8px white;
     display: flex;
     align-items: center;
-}
-
-.input-bar{
-    background-color: transparent;
+  }
+  
+  .bar-div {
+    flex-grow: 1;
+    margin-right: 10px; /* Aumenta o diminuisce questo valore per modificare la distanza */
+  }
+  
+  .search-button-div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-bar {
+    background-color: white;
     border: none;
+    border-radius: 10px;
     height: 100%;
     font-size: 1.25rem;
     width: 100%;
-    margin-left: 5px;
-}
+  }
 
 .input-bar:focus {
     outline: none;
 }
+
+.search-button {
+    text-decoration: none;
+  }
+  
+  .search-button button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

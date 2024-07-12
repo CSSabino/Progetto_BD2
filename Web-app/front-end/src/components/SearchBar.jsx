@@ -25,15 +25,19 @@ export const SearchBar = ({setResults}) => {
   
     return (
     <div className="input-wrapper"> 
-        <input className="input-bar"
-            placeholder='Type to search...' 
-            value={input} 
-            onChange={(e) => handleChange(e.target.value)}
-        />
-        <Link
-        to={`/search-phones?value=${input}`}
-        className="search-button"> <button>Search All</button>
-        </Link>
+        <div className="bar-div">
+            <input className="input-bar"
+                    placeholder='Type to search...' 
+                    value={input} 
+                    onChange={(e) => handleChange(e.target.value)}
+            />
+        </div>
+        <div className="search-button-div">
+            <Link
+                to={`/search-phones?value=${input}`}
+                className="search-button"> <button>Search All</button>
+            </Link>
+        </div>
     </div>
-  )
-}
+  );
+};
