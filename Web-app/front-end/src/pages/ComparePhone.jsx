@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, isValidElement } from 'react';
 
 import Phone from '../components/Phone';
 
@@ -26,24 +26,34 @@ const ComparePhone = () => {
   }, []);
 
   const handlePhone1Select = async (id) => {
-    setPhone1(id);
-    try {
-      const response = await fetch(`api/smartphoneOperations/id/${id}`);
-      const data = await response.json();
-      setDetails1(data);
-    } catch (error) {
-      console.error('Error fetching phone details:', error);
+    if (id === '') {
+      setDetails1(null)
+      setPhone1(null)
+    } else {
+      setPhone1(id);
+      try {
+        const response = await fetch(`api/smartphoneOperations/id/${id}`);
+        const data = await response.json();
+        setDetails1(data);
+      } catch (error) {
+        console.error('Error fetching phone details:', error);
+      }
     }
   };
 
   const handlePhone2Select = async (id) => {
-    setPhone2(id);
-    try {
-      const response = await fetch(`api/smartphoneOperations/id/${id}`);
-      const data = await response.json();
-      setDetails2(data);
-    } catch (error) {
-      console.error('Error fetching phone details:', error);
+    if (id === '') {
+      setDetails2(null)
+      setPhone2(null)
+    } else {
+      setPhone2(id);
+      try {
+        const response = await fetch(`api/smartphoneOperations/id/${id}`);
+        const data = await response.json();
+        setDetails2(data);
+      } catch (error) {
+        console.error('Error fetching phone details:', error);
+      }
     }
   };
 
@@ -66,7 +76,7 @@ const ComparePhone = () => {
           ))}
         </select>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px'}}>
+      <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
 
         {details1 ? (
           <div>

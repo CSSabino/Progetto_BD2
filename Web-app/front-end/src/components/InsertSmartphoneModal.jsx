@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+
+import '../style/modal.css'
 
 const InsertSmartphoneModal = ({ isOpen, onClose }) => {
     const { user } = useAuthContext();
@@ -32,6 +34,34 @@ const InsertSmartphoneModal = ({ isOpen, onClose }) => {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setBrand_name('')
+        setModel('')
+        setPrice('')
+        setRating('')
+        setHas_5g(false)
+        setHas_nfc(false)
+        setHas_ir_blaster(false)
+        setProcessor_brand('')
+        setNum_cores('')
+        setProcessor_speed('')
+        setBattery_capacity('')
+        setFast_charging_available(false)
+        setRam_capacity('')
+        setInternal_memory('')
+        setScreen_size('')
+        setRefresh_rate('')
+        setResolution('')
+        setNum_rear_cameras('')
+        setNum_front_cameras('')
+        setOs('')
+        setPrimary_camera_rear('')
+        setPrimary_camera_front('')
+        setExtended_memory_available(false)
+
+    }, [onClose]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

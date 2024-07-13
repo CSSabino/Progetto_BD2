@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-import '../style/passwordChangeModal.css'
+import '../style/modal.css'
 
 const PasswordChangeModal = ({ isOpen, onClose }) => {
-    const { user } = useAuthContext();
+  const { user } = useAuthContext();
 
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
-    const handlePasswordChange = async (e) => {
-        e.preventDefault();
+  useEffect(() => {
+    setNewPassword('');
+    setConfirmPassword('');
+    setError(null)
+  }, [onClose]);
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
 
     if (newPassword !== confirmPassword) {
       setError("Passwords do not match");
@@ -19,35 +25,36 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
     }
 
     try {
-        const response = await fetch('/api/userOperations/changePassword', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}`},
-          body: JSON.stringify({newPassword})
-        });
-        const data = await response.json();
+      const response = await fetch('/api/userOperations/changePassword', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` },
+        body: JSON.stringify({ newPassword })
+      });
+      const data = await response.json();
 
-        if(!response.ok){
-            setError(data.error)
-            return;
-        }
+      if (!response.ok) {
+        setError(data.error)
+        return;
+      }
 
-        if(response.ok){
+      if (response.ok) {
 
-            let userStorage = JSON.parse(localStorage.getItem('user'))
-      
-            userStorage.user.password = data.user.password
-      
-            localStorage.setItem('user', JSON.stringify(userStorage)) 
+        let userStorage = JSON.parse(localStorage.getItem('user'))
 
-        }
+        userStorage.user.password = data.user.password
+
+        localStorage.setItem('user', JSON.stringify(userStorage))
+
+      }
 
     } catch (error) {
-        console.error('Error update user:', error);
+      console.error('Error update user password:', error);
       setError(error)
     }
 
     setNewPassword('');
     setConfirmPassword('');
+    setError('')
     onClose();
   };
 
@@ -68,7 +75,6 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
               required
             />
           </label>
-          <br></br>
           <label>
             Confirm New Password:
             <input
@@ -79,11 +85,10 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
             />
           </label>
 
-          <br></br>
-          <br></br>
-          
           <button type="submit">Change Password</button>
-          {error && <p>{error}</p>}
+
+          {error && <h4 style={{ color: "red" }}>{error}</h4>}
+
         </form>
       </div>
     </div>

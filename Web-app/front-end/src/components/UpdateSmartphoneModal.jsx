@@ -62,7 +62,7 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
         } else {
             setErrorSmartphoneDatails("Non è stato selezionato nessuno smartphone da aggiornare. Si prega di selezionarlo dal menù a tendina.")
         }
-    }, [detailsPhoneSelected]);
+    }, [detailsPhoneSelected, onClose]);
 
 
     const handleSubmit = async (e) => {
@@ -201,8 +201,11 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
                         <label>Extended Memory Available:</label>
                         <input type="checkbox" checked={extended_memory_available} onChange={(e) => setExtended_memory_available(e.target.checked)} />
                     </div>
+
                     <button type="submit">Submit</button>
-                    {error && <p>{error}</p>}
+
+                    {error && <h4 style={{color: "red"}}>{error}</h4>}
+
                 </form>
                 )}
                 {!detailsPhoneSelected && (

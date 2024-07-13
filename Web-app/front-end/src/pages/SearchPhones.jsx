@@ -48,7 +48,7 @@ function SearchPhones() {
   if (phones.length <= 0) 
     return(
           <div>
-            <p>No smartphone found with this specifics</p>
+            <h1>No smartphone found with this specifics</h1>
           </div>
     );
 

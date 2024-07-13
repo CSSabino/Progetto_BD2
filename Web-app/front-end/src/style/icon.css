@@ -1,5 +1,14 @@
-.icon {
-    font-size: 18px;
+  .icon {
+      font-size: 18px;
+    }
+
+  .icon-star-rating {
+    color: #ffc107;
+    font-size: 12px;
+  }
+
+  .icon-smartphone {
+    font-size: 200px;
   }
   
   .icon-confirm {

@@ -33,7 +33,7 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
-  height: 250px;
+  height: 50vh;
   overflow-y: scroll;
 }
 
@@ -53,4 +53,20 @@
   font-family: 'Roboto Slab', serif;
   font-size: 0.9rem;
   margin-top: 10px;
+}
+
+.content-smartphoneop {
+  align-items: center;
+  height: 70vh;
+  width: 70%;
+  float: right;
+}
+
+.content-smartphoneop select {
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.content-operation {
+  margin-bottom: 20%;
 }

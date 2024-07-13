@@ -35,7 +35,7 @@ h1{
 
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
+  margin: 0 0 100px 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -55,24 +55,4 @@ main {
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
-}
-
-.phone-card {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 5px;
-  flex: 1 1 calc(33.333% - 40px); /* Tre carte per riga con spazio tra loro */
-  box-sizing: border-box; /* Includi padding e bordo nella larghezza totale */
-}
-
-@media (max-width: 900px) {
-  .phone-card {
-    flex: 1 1 calc(50% - 40px); /* Due carte per riga su schermi più piccoli */
-  }
-}
-
-@media (max-width: 600px) {
-  .phone-card {
-    flex: 1 1 calc(100% - 40px); /* Una carta per riga su schermi molto piccoli */
-  }
 }

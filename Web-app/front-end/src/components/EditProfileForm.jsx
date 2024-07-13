@@ -1,90 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { useAuthContext } from '../hooks/useAuthContext';
 
+import { MdEdit } from "react-icons/md";
+
+import EditUserModal from './EditUserModal'
 import PasswordChangeModal from './PasswordChangeModal'
 
 const EditProfileForm = () => {
-  const { user } = useAuthContext();
+  const [isHandleUpdateUserOpen, setIsHandleUpdateUserOpen] = useState(false);
+  const [isHandlePasswordChangeOpen, setIsHandlePasswordChangeOpen] = useState(false);
 
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');  
-  const [error, setError] = useState(null)  
-  const [isLoading, setIsLoading] = useState(null)
-  
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleUpdateUserModal = () => {
+    setIsHandleUpdateUserOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleUpdateUserCloseModal = () => {
+    setIsHandleUpdateUserOpen(false);
   };
 
-  useEffect(() => {
-    if (user) {
-      setName(user.user.name);
-      setSurname(user.user.surname);
-      setError(null)
-    }
-  }, [user]);
+  const handlePasswordChangeModal = () => {
+    setIsHandlePasswordChangeOpen(true);
+  };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch('/api/userOperations/updateUserData', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}`},
-        body: JSON.stringify({name, surname})
-      });
-      const data = await response.json();
-
-      if(!response.ok){
-        setIsLoading(false)
-        setError(data.error)
-      }
-
-      if(response.ok){
-
-        let userStorage = JSON.parse(localStorage.getItem('user'))
-      
-        userStorage.user.name = data.user.name
-        userStorage.user.surname = data.user.surname
-      
-        localStorage.setItem('user', JSON.stringify(userStorage)) 
-
-        setIsLoading(false)
-      }     
-    } catch (error) {
-      console.error('Error update user:', error);
-      setError(error)
-    }
+  const handlePasswordChangeCloseModal = () => {
+    setIsHandlePasswordChangeOpen(false);
   };
 
   return (
     <div>
-      <div>
-        <form onSubmit={handleUpdate}>
-          <h2>Edit Profile</h2>
-          <label>
-            Name:
-            <input type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
-          </label>
-
-          <br></br>
-          
-          <label>
-            Surname:
-            <input type="text" placeholder="Enter surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
-          </label>      
-          {error && <div>{error}</div>}
-          <button type="submit" disabled={isLoading}>Update</button>
-        </form>
+      <div className="content">
+        <button onClick={handleUpdateUserModal}>
+          <h4>
+            <MdEdit className='icon' /> UPDATE DATA USER
+          </h4>
+        </button>
+        <EditUserModal isOpen={isHandleUpdateUserOpen} onClose={handleUpdateUserCloseModal} />
       </div>
       <div className="content">
-        <button onClick={handleOpenModal}>Change Password</button>
-        <PasswordChangeModal isOpen={isModalOpen} onClose={handleCloseModal} />
+        <button onClick={handlePasswordChangeModal}>
+          <h4>
+            <MdEdit className='icon' /> CHANGE PASSWORD
+          </h4>
+        </button>
+        <PasswordChangeModal isOpen={isHandlePasswordChangeOpen} onClose={handlePasswordChangeCloseModal} />
       </div>
     </div>
   );

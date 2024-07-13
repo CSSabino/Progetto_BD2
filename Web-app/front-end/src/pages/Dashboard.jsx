@@ -16,9 +16,9 @@ function Dashboard() {
           <Sidebar />
           
           <div className='content'>
-            <p>Ciao {userLogged.username}, benvenuto sul portale "Phone Comparison"</p>
+            <h3>Hi {userLogged.username}, welcome on the "Phone Comparison" platform!</h3>
             {userLogged.isAdmin && (
-            <p>In qualità di admin, puoi effettuare operazioni ci inserimento, cancellazione ed aggiornamento degli smartphone presenti in piattaforma!</p>
+            <h3>As an admin, you can carry out operations such as inserting, deleting and updating smartphones on the platform!</h3>
             )}
           </div>
 

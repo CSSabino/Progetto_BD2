@@ -104,7 +104,7 @@ function PhoneDetails() {
           </div>
 
           <h3>Add a Review</h3>
-          {reviewError && <p style={{ color: 'red' }}>{reviewError}</p>}
+          {reviewError && <h4 style={{ color: 'red' }}>{reviewError}</h4>}
           <form onSubmit={handleReviewSubmit} className="review-form">
             <div>
               <label htmlFor="rating">Rating:</label>

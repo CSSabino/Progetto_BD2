@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from 'react';
 import { useSignup } from "../hooks/useSignup"
 
 import '../style/register.css'
@@ -10,7 +10,7 @@ const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [errorMatchin, setErrorMatching] = useState('')
+    const [errorMatching, setErrorMatching] = useState('')
     const {signup, error, isLoading} = useSignup()
 
     const handleSubmit = async (e) => {
@@ -23,6 +23,10 @@ const Signup = () => {
         
         await signup(name, surname, email, username, password)
     }
+
+    useEffect(() => {
+      setErrorMatching('')
+  }, [isLoading]);
 
     return (
         <div className="register-container">
@@ -86,8 +90,8 @@ const Signup = () => {
             </div>
             
             <button type="submit" disabled={isLoading}>Sign up</button>
-            {errorMatchin && <p>{errorMatchin}</p>}
-            {error && <div>{error}</div>}
+            {errorMatching && <h4 className="error">{errorMatching}</h4>}
+            {error && <h4 className="error">{error}</h4>}
           </form>
         </div>
       );

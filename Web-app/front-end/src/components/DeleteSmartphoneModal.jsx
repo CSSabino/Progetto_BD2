@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
+import '../style/modal.css'
+
 const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
     const { user } = useAuthContext();
 

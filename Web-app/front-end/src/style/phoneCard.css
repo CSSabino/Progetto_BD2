@@ -1,0 +1,31 @@
+.phone-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    flex: 1 1 calc(33.333% - 40px);
+    /* Tre carte per riga con spazio tra loro */
+    box-sizing: border-box;
+    /* Includi padding e bordo nella larghezza totale */
+}
+
+@media (max-width: 900px) {
+    .phone-card {
+        flex: 1 1 calc(50% - 40px);
+        /* Due carte per riga su schermi più piccoli */
+    }
+}
+
+@media (max-width: 600px) {
+    .phone-card {
+        flex: 1 1 calc(100% - 40px);
+        /* Una carta per riga su schermi molto piccoli */
+    }
+}
+
+.details {
+    border-radius: 5px;
+    flex: 1 1 calc(50% - 10px);
+    display: inline-block;
+    flex-wrap: wrap;
+    max-width: 49%;
+}

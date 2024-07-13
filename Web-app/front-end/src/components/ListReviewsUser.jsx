@@ -55,7 +55,7 @@ const UserReviews = () => {
           </div>
       )}
           {reviews.length <= 0 && (
-            <p>Non hai ancora recensioni</p>
+            <p>No reviews yet</p>
           )}
         </div>
       );
