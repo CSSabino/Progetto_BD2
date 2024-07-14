@@ -116,7 +116,7 @@ const InsertSmartphoneModal = ({ isOpen, onClose }) => {
                     </div>
                     <div>
                         <label>Price:</label>
-                        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required min="0" max="9999" />
+                        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required min="0" max="9999.99" step="0.01" />
                     </div>
                     <div>
                         <label>Rating:</label>
@@ -144,7 +144,7 @@ const InsertSmartphoneModal = ({ isOpen, onClose }) => {
                     </div>
                     <div>
                         <label>Processor Speed:</label>
-                        <input type="number" value={processor_speed} onChange={(e) => setProcessor_speed(e.target.value)} required min="0" />
+                        <input type="number" value={processor_speed} onChange={(e) => setProcessor_speed(e.target.value)} required min="0" step="0.01" />
                     </div>
                     <div>
                         <label>Battery Capacity:</label>
@@ -164,7 +164,7 @@ const InsertSmartphoneModal = ({ isOpen, onClose }) => {
                     </div>
                     <div>
                         <label>Screen Size:</label>
-                        <input type="number" value={screen_size} onChange={(e) => setScreen_size(e.target.value)} required min="0" />
+                        <input type="number" value={screen_size} onChange={(e) => setScreen_size(e.target.value)} required min="0" step="0.01" />
                     </div>
                     <div>
                         <label>Refresh Rate:</label>
