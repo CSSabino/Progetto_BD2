@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Phone from '../components/Phone';
 import Review from '../components/Review';
@@ -22,7 +23,15 @@ function PhoneDetails() {
       try {
         const response = await fetch(`/api/smartphoneOperations/id/${id}`);
         const data = await response.json();
-        setSmartphone(data);
+
+        if(response.ok){
+          setSmartphone(data);
+        }
+
+        if(!response.ok){
+          setError('Error fetching phone details: perhaps the smartphone has been deleted')
+        }
+
       } catch (err) {
         setError('Error fetching phone details');
       }
@@ -80,7 +89,7 @@ function PhoneDetails() {
   };
 
   if (error) {
-    return <div>{error}</div>;
+    return <div><h1>{error}</h1> <Link to="/"><button>BACK TO HOME PAGE</button></Link></div>;
   }
 
   if (!smartphone) return <p>No smartphone found</p>;

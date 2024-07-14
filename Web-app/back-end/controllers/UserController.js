@@ -25,7 +25,6 @@ const signupUser = async (req, res) => {
 
     try{
         const user = await User.signup(name, surname, email, username, password)
-        console.log('signupUser', user)
         const token = createToken(user._id)
         return res.status(200).json({user: user, token})
     } catch (error) {
@@ -38,7 +37,6 @@ const changePassword = async (req, res) => {
 
     try{
         const user = await User.changePassword(req.user, newPassword)
-        console.log('changePassword', user)
         return res.status(200).json({user})
     } catch (error) {
         return res.status(400).json({error: error.message})
@@ -50,7 +48,6 @@ const updateUserData = async (req, res) => {
 
     try{
         const user = await User.updateUserData(name, surname, req.user);
-        console.log('updateUserData', user)
         return res.status(200).json({user: user})
     } catch (error) {
         return res.status(400).json({error: error.message})

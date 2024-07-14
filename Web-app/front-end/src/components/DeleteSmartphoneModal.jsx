@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-import '../style/modal.css'
-
-const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
+const DeleteSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected, setOperationSuccess, setMessageSuccess }) => {
     const { user } = useAuthContext();
 
     const [brand_name, setBrand_name] = useState('');
@@ -12,8 +10,6 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
 
     const [error, setError] = useState('');
     const [errorSmartphoneDetails, setErrorSmartphoneDatails] = useState('');
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (detailsPhoneSelected) {
@@ -43,7 +39,8 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
             }
 
             if (response.ok) {
-                navigate(`/phoneS`);
+                setOperationSuccess(true)
+                setMessageSuccess("The smartphone have been deleted successfully")
             }
 
         } catch (error) {
@@ -86,5 +83,5 @@ const InsertSmartphoneModal = ({ isOpen, onClose, detailsPhoneSelected }) => {
     );
 };
 
-export default InsertSmartphoneModal
+export default DeleteSmartphoneModal
 

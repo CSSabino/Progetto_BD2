@@ -3,7 +3,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 import '../style/modal.css'
 
-const PasswordChangeModal = ({ isOpen, onClose }) => {
+const PasswordChangeModal = ({ isOpen, onClose, setOperationSuccess, setMessageSuccess }) => {
   const { user } = useAuthContext();
 
   const [newPassword, setNewPassword] = useState('');
@@ -45,6 +45,8 @@ const PasswordChangeModal = ({ isOpen, onClose }) => {
 
         localStorage.setItem('user', JSON.stringify(userStorage))
 
+        setOperationSuccess(true)
+        setMessageSuccess("The password has been updated successfully")
       }
 
     } catch (error) {

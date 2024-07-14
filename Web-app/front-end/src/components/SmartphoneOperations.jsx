@@ -11,6 +11,11 @@ import { MdEdit, MdDelete } from "react-icons/md";
 const SmartphoneOperation = () => {
     const { user } = useAuthContext();
 
+
+    const [showModalSuccess, setShowModalSuccess] = useState(false);
+    const [operationSuccess, setOperationSuccess] = useState(false);
+    const [messageSuccess, setMessageSuccess] = useState('')
+
     const [phones, setPhones] = useState([]);
     const [phoneUpdateSelected, setUpdatePhoneSelected] = useState(null);
     const [phoneDeleteSelected, setDeletePhoneSelected] = useState(null);
@@ -27,15 +32,13 @@ const SmartphoneOperation = () => {
                 const response = await fetch('/api/smartphoneOperations');
                 const data = await response.json();
                 setPhones(data);
-                setUpdatePhoneSelected(phones[0]._id)
-                setUpdateDetailsPhoneSelected(phones[0])
             } catch (error) {
                 console.error('Error fetching phones:', error);
             }
         };
 
         fetchPhones();
-    }, []);
+    }, [operationSuccess]);
 
     const handleUpdatePhoneSelect = async (id) => {
         setUpdatePhoneSelected(id);
@@ -96,10 +99,29 @@ const SmartphoneOperation = () => {
 
     const closeDeleteModal = () => {
         setDeleteModalOpen(false);
+
+        if (setOperationSuccess)
+            setShowModalSuccess(true)
     };
+
+    const handleCloseShowModalSuccess = () => {
+        setOperationSuccess(false)
+        setShowModalSuccess(false)
+        setMessageSuccess('')
+      };
 
     return (
         <div className='content-smartphoneop'>
+
+            {operationSuccess && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={handleCloseShowModalSuccess}>&times;</span>
+                        <h3>{messageSuccess}</h3>
+                    </div>
+                </div>
+            )}
+
             <div className="content-operation">
                 <button onClick={openInsertModal}>
                     <h4>
@@ -140,7 +162,7 @@ const SmartphoneOperation = () => {
                         <MdDelete className='icon' /> DELETE SMARTPHONE
                     </h4>
                 </button>
-                <DeleteSmartphoneModal isOpen={deleteModalOpen} onClose={closeDeleteModal} detailsPhoneSelected={detailsDeletePhoneSelected} />
+                <DeleteSmartphoneModal isOpen={deleteModalOpen} onClose={closeDeleteModal} detailsPhoneSelected={detailsDeletePhoneSelected} setOperationSuccess={setOperationSuccess} setMessageSuccess={setMessageSuccess} />
             </div>
         </div>
     );

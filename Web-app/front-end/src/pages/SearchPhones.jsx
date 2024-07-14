@@ -6,6 +6,7 @@ import '../style/allPhones.css'
 function SearchPhones() {
   const [phones, setPhones] = useState([]);
   const [sortBy, setSortBy] = useState('price_asc')
+  const [valueSearch, setValueSearch] = useState('')
   const location = useLocation();
   const [error, setError] = useState('');
 
@@ -13,6 +14,8 @@ function SearchPhones() {
     const fetchPhones = async () => {
       const query = new URLSearchParams(location.search);
       const paramValue = query.get('value');
+
+      setValueSearch(paramValue)
 
       const brand_name = paramValue
       const model = paramValue
@@ -53,12 +56,13 @@ function SearchPhones() {
   if (phones.length <= 0)
     return (
       <div>
-        <h1>No smartphone found with this specifics</h1>
+        <h1>No smartphone found with this specific: "{valueSearch}"</h1>
       </div>
     );
 
   return (
     <div>
+      <h1>Result for search "{valueSearch}"</h1>
       <div className="button-container">
         <button className="custom-button" onClick={() => handleSortChange ('price_asc')}>Sort by Price (Low to High)</button>
         <button className="custom-button" onClick={() => handleSortChange ('price_desc')}>Sort by Price (High to Low)</button>

@@ -12,8 +12,6 @@ export const SearchResultsList = ({ results, numResult, clearResults }) => {
       { numResult && (
         <span style={{color: "#007bff", textAlign: "center", fontSize: "14px", fontWeight: "bold"}}>There are other smarthpone with this value: Search All</span>
       )}
-      
-      {console.log(numResult)}
     </div>
   )
 }

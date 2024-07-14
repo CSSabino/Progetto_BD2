@@ -3,7 +3,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 import '../style/modal.css'
 
-const EditUserModal = ({ isOpen, onClose }) => {
+const EditUserModal = ({ isOpen, onClose, setOperationSuccess, setMessageSuccess }) => {
     const { user } = useAuthContext();
 
     const [name, setName] = useState('');
@@ -52,7 +52,9 @@ const EditUserModal = ({ isOpen, onClose }) => {
                 userStorage.user.surname = data.user.surname
 
                 localStorage.setItem('user', JSON.stringify(userStorage))
-
+                
+                setOperationSuccess(true)
+                setMessageSuccess("The fields have been updated successfully")
             }
 
         } catch (error) {

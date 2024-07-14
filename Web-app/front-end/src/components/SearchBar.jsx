@@ -31,6 +31,7 @@ export const SearchBar = ({ setResults, setNumResult }) => {
     const clearResults = () => {
         setResults([]);
         setNumResult(false)
+        setInput('')
     };
 
     return (
