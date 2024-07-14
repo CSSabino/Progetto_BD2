@@ -5,6 +5,7 @@ import '../style/allPhones.css'
 
 function SearchPhones() {
   const [phones, setPhones] = useState([]);
+  const [sortBy, setSortBy] = useState('price_asc')
   const location = useLocation();
   const [error, setError] = useState('');
 
@@ -20,7 +21,7 @@ function SearchPhones() {
         const response = await fetch('api/smartphoneOperations/filter', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ brand_name, model })
+          body: JSON.stringify({ brand_name, model, sortBy })
         });
         const data = await response.json();
 
@@ -39,21 +40,32 @@ function SearchPhones() {
 
     fetchPhones();
 
-  }, [location]);
+  }, [location, sortBy]);
+
+  const handleSortChange = (value) => {
+    setSortBy(value);
+};
 
   if (error) {
     return <div>{error}</div>;
   }
 
-  if (phones.length <= 0) 
-    return(
-          <div>
-            <h1>No smartphone found with this specifics</h1>
-          </div>
+  if (phones.length <= 0)
+    return (
+      <div>
+        <h1>No smartphone found with this specifics</h1>
+      </div>
     );
 
   return (
     <div>
+      <div className="button-container">
+        <button className="custom-button" onClick={() => handleSortChange ('price_asc')}>Sort by Price (Low to High)</button>
+        <button className="custom-button" onClick={() => handleSortChange ('price_desc')}>Sort by Price (High to Low)</button>
+        <button className="custom-button" onClick={() => handleSortChange ('rating_asc')}>Sort by Rating (Low to High)</button>
+        <button className="custom-button" onClick={() => handleSortChange ('rating_desc')}>Sort by Rating (High to Low)</button>
+      </div>
+
       <div className="phone-list">
         {phones.map((phone) => (
           <PhoneCard key={phone._id} phone={phone} />

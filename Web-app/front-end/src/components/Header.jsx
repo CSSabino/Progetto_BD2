@@ -10,7 +10,8 @@ function Header() {
   const { logout } = useLogout()
   const { user } = useAuthContext()
 
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState([]);  
+  const [numResult, setNumResult] = useState(false)
 
 
   const handleLogout = () => {
@@ -19,6 +20,7 @@ function Header() {
 
   const clearResults = () => {
     setResults([]);
+    setNumResult(false)
   };
   
   return (
@@ -56,8 +58,8 @@ function Header() {
           )}
           <li>
             <div className='search-bar-conteiner'>
-              <SearchBar setResults={setResults} />
-              <SearchResultsList results={results} clearResults={clearResults} />
+              <SearchBar setResults={setResults} setNumResult={setNumResult} />
+              <SearchResultsList results={results} numResult={numResult} clearResults={clearResults} />
             </div>
           </li>
         </ul>

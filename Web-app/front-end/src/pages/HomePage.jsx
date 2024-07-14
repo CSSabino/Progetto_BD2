@@ -9,7 +9,7 @@ function HomePage() {
       try {
         const response = await fetch('api/smartphoneOperations');
         const json = await response.json()
-        // Prendi solo i primi 6 telefoni
+        
         if(response.ok){
           setPhones(json.slice(0, 6))
         }

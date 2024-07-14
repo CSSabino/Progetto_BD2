@@ -75,7 +75,7 @@ function PhoneDetails() {
         setReviewError(data.error || 'Failed to add review.');
       }
     } catch (err) {
-      setReviewError('Failed to add review.');
+      setReviewError('Failed to add review: LOG IN to the platform.');
     }
   };
 
@@ -92,7 +92,7 @@ function PhoneDetails() {
       <Phone key={smartphone._id} smartphone={smartphone} />
 
         <div className="reviews-section">
-          <h2>Reviews</h2>
+          <h2>User reviews</h2>
           <div className='reviews-list'>
             {smartphone.reviews && smartphone.reviews.length > 0 ? (
               smartphone.reviews.map((review) => (

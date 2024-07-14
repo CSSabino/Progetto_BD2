@@ -347,15 +347,17 @@ const filterSearchAndSortSmartphones = async (req, res) => {
         }
     }
 
-    // Brand name research
-    if (brand_name) {
-        query.brand_name = { $regex: new RegExp(brand_name, "i") };
-    }
-
-    // Model research
-    if (model) {
-        query.model = { $regex: new RegExp(model, "i") };
-    }
+     // Brand name and Model research
+     const regexConditions = [];
+     if (brand_name) {
+         regexConditions.push({ brand_name: { $regex: new RegExp(brand_name, "i") } });
+     }
+     if (model) {
+         regexConditions.push({ model: { $regex: new RegExp(model, "i") } });
+     }
+     if (regexConditions.length > 0) {
+         query.$or = regexConditions;
+     }
 
     // Sorting
     const validSortOptions = ["price_asc", "price_desc", "rating_asc", "rating_desc"];

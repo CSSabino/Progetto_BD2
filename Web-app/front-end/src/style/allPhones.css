@@ -8,6 +8,7 @@
   
   .button-container button {
     background-color: #007BFF;
+    width: 19%;
     color: white;
     border: none;
     border-radius: 5px;
