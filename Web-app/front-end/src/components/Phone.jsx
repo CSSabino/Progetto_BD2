@@ -29,7 +29,7 @@ function Phone({ smartphone }) {
                 <div className="phone-detail">Number of Cores: {smartphone.num_cores}</div>
                 <div className="phone-detail">Processor Speed: {smartphone.processor_speed} GHz</div>
                 <div className="phone-detail">Battery Capacity: {smartphone.battery_capacity} mAh</div>
-                <div className="phone-detail">Fast Charging Available: {smartphone.fast_charging_available}</div>
+                {booleanField("Fast Charging Available", smartphone.fast_charging_available)}
                 <div className="phone-detail">RAM Capacity: {smartphone.ram_capacity} GB</div>
                 <div className="phone-detail">Screen Size: {smartphone.screen_size} inches</div>
                 <div className="phone-detail">Refresh Rate: {smartphone.refresh_rate} Hz</div>
